@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+
+# salidas de fpocket y PROPKA (se regeneran con scripts/analizar_cavidades.py)
+data/estructuras/*_out/
+data/estructuras/*.pka

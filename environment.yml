@@ -1,0 +1,11 @@
+name: tp-estructural
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - numpy
+  - matplotlib
+  - biopython
+  - fpocket=4.2.3
+  - propka=3.5.1
