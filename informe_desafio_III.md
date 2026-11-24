@@ -19,11 +19,11 @@ queda vacío.
 
 La cavidad 1 contiene tres de los cuatro residuos de la tetrada catalítica
 (D50, Y55, H117) y varios residuos que contactan el NADP (G22, T23, S217, R223,
-N167). K84 no quedó asignada a la cavidad por fpocket, pero está a **2,89 Å** del
-OH de Y55, en el borde del sitio; su función es justamente modular el pKa de la
-tirosina. Es una cavidad grande, única y drogable: un bolsillo atractivo para
-inhibidores, aunque la selectividad frente a las otras isoformas de AKR1C (muy
-similares) es el problema central del diseño.
+N167). K84 no quedó asignada a la cavidad por fpocket, pero está cerca del OH de
+Y55 en la estructura (distancia entre NZ de K84 y OH de Y55: 2,89 Å); UniProt la
+anota como residuo que modula el pKa de la tirosina. Es una cavidad grande, única y
+con druggability > 0,5, que podría estudiarse para inhibidores. La selectividad
+frente a las otras isoformas de AKR1C sería una dificultad a considerar.
 
 **pKa (PROPKA, sin NADP):** H117 1,52 (muy ácido), Y55 11,24, K84 12,27. Estos
 valores no deben tomarse como los pKa fisiológicos definitivos: la ausencia del
@@ -36,4 +36,4 @@ sola cavidad drogable, que es la conclusión relevante.
 
 ---
 
-El contexto general, la metodología y las referencias completas están en el [informe integral](informe.md).
+El contexto, la metodología y las referencias están en el [informe integral revisado](TP_revisado.md).

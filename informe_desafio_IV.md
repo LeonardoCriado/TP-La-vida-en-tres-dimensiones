@@ -14,7 +14,7 @@ Sudlow II).
 | | Resultado |
 |---|---|
 | Cavidades predichas | **36** |
-| Cavidades drogables | **2** (cavidad 1: 2656 Å³, 0,955; cavidad 2: 326 Å³, 0,675) |
+| Cavidades con druggability > 0,5 | **2** (cavidad 1: 2656,5 Å³, 0,955; cavidad 2: 325,6 Å³, 0,675) |
 | Cavidades más grandes | 36 (2713 Å³, 0,36), 1 (2656 Å³, 0,955), 30 (1388 Å³, 0,05), 18 (1197 Å³, 0,02) |
 | Cavidad del sitio I (AII) | **cavidad 1**, 2656 Å³, 65 residuos, druggability 0,955 |
 | Cavidad del sitio II (AIII) | **cavidad 2**, 326 Å³, druggability 0,675 |
@@ -23,17 +23,15 @@ Sudlow II).
 
 **¿Se solapan las cavidades con los residuos relevantes?**
 
-- **K195, K199, R222, W214, R218, H242** están en la **cavidad 1** (sitio AII).
+- **K195, K199, R222, W214, R218 y H242** están en la **cavidad 1** (zona AII).
   La cavidad 1 es la segunda más grande de la proteína (la 36 es apenas mayor pero
   no es drogable), lo que coincide con la descripción del sitio AII como una de las
   cavidades principales.
-- **R410 y Y411** están en la **cavidad 2** (sitio AIII).
-- **C34** no pertenece a ninguna cavidad predicha: está en una grieta superficial,
-  accesible, consistente con su papel de tiol libre reactivo y con su participación
-  en reacciones redox/antioxidantes.
-- **K195** también está en la cavidad 1, junto con K199 y R222.
+- **R410 y Y411** están en la **cavidad 2** (zona AIII).
+- **C34** no aparece entre los residuos de las cavidades de fpocket. Esto no permite
+  concluir por sí solo cuál es su accesibilidad o función química.
 
-**pKa y cavidades activadas**
+**pKa y posibles cavidades activadas**
 
 | Residuo | pKa calculado | pKa esperado | Δ |
 |---|---|---|---|
@@ -44,25 +42,25 @@ Sudlow II).
 | R410 (cavidad 2) | 11,99 | 12,50 | −0,51 |
 | Y411 (cavidad 2) | 11,19 | 10,00 | +1,19 |
 
-La **cavidad 1** tiene 27 residuos ionizables, con un rango de pKa de 1,31 a 14,12
-y un promedio de 8,43; el corrimiento neto absoluto es 40,6. Lo importante no es el
-promedio (la cavidad es enorme y heterogénea) sino que **K199 y R222 están
-anormalmente acidificados**. Esa acidificación es la firma de una cavidad
-"activada": un ambiente hidrofóbico con residuos básicos cercanos (R218, R222,
-K195) que desestabiliza la forma protonada de la lisina y de la arginina y baja su
-pKa. Es exactamente lo que se necesita para una catálisis promiscua: una lisina que
-pueda actuar como base/nucleófilo a pH fisiológico.
+La **cavidad 1** tiene 27 residuos ionizables. Sus pKa calculados van de 1,31 a
+14,12 y el promedio es 8,43. La suma de los valores absolutos de los corrimientos
+respecto de los valores de referencia es 40,57; no es un pKa ni una medida directa
+de actividad. En particular, PROPKA predice valores menores que los de referencia
+para K199 (6,78) y R222 (9,16). Un pKa desplazado indica que el entorno estructural
+podría modificar su protonación. CaviDB usa estos desplazamientos para señalar
+cavidades potencialmente activadas, pero este cálculo por sí solo no prueba que
+K199 o R222 catalicen una reacción ni explica el mecanismo.
 
-La **cavidad 2** (sitio AIII) tiene 6 residuos ionizables, rango 11,19–13,51,
-promedio 12,23 y corrimiento neto 2,7: **no** está activada. R410 y Y411 no muestran
-un corrimiento fuerte.
+La **cavidad 2** (zona AIII) tiene 6 residuos ionizables, rango 11,19–13,51,
+promedio 12,23 y suma absoluta de corrimientos 2,71. En los residuos de interés,
+los desplazamientos calculados son menores que los de K199 y R222; con estos
+resultados no la clasificamos como potencialmente activada.
 
-**Comparación con CaviDB.** El trabajo de CaviDB reporta para 1AO6A una Lys199 con
-pKa ~7,51 y una Arg222 ~9,49, y describe la cavidad 1 como la cavidad grande del
-sitio AII con esas dos "residuos activados". Nuestros valores (6,78 y 9,16) son
-algo más ácidos, pero reproducen el mismo fenómeno y el mismo ordenamiento. Las
-diferencias son esperables: una sola conformación, sin hidrógenos explícitos, sin
-ligandos, y una versión de PROPKA distinta.
+**Comparación con CaviDB.** Para HSA, la publicación de CaviDB [13] informa pKa calculados
+aproximados de 7,51 para K199 y 9,49 para R222. En esta corrida obtuvimos 6,78 y
+9,16. Son predicciones calculadas, no mediciones experimentales; la diferencia es
+posible porque no se reprodujeron el mismo conjunto de conformaciones y todos los
+parámetros del análisis publicado.
 
 **Respuestas puntuales**
 
@@ -71,12 +69,13 @@ ligandos, y una versión de PROPKA distinta.
   (1388 Å³), 18 (1197 Å³); la más relevante funcionalmente es la 1.
 - *¿Hay cavidades que se solapen con los residuos relevantes?* Sí: cavidad 1 con
   K195/K199/R222/W214; cavidad 2 con R410/Y411; C34 no está en ninguna.
-- *¿Alguna cavidad catalíticamente activa está activada?* Sí, la cavidad 1 (sitio
-  AII): K199 y R222 tienen pKa anormalmente ácidos.
+- *¿Hay una cavidad con residuos que muestran desplazamientos de pKa?* Sí, en la
+  cavidad 1 se predicen desplazamientos para K199 y R222. Esto es una pista para
+  investigar, no una demostración de catálisis.
 - *¿Qué rangos de pKa se observan?* En la cavidad 1, 1,31–14,12 (promedio 8,43);
-  los residuos catalíticos, 6,78 (K199) y 9,16 (R222). En la cavidad 2,
+  los residuos destacados, 6,78 (K199) y 9,16 (R222). En la cavidad 2,
   11,19–13,51 (promedio 12,23).
 
 ---
 
-El contexto general, la metodología y las referencias completas están en el [informe integral](informe.md).
+El contexto, la metodología y las referencias están en el [informe integral revisado](TP_revisado.md).

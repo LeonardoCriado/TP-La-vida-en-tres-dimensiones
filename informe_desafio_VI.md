@@ -7,9 +7,11 @@ Leonardo Criado · noviembre de 2026
 
 **Procedimiento en ColabFold.** Se abre el notebook
 [AlphaFold2.ipynb](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb),
-se pega la secuencia de E7 en `query_sequence`, se elige un `jobname`, se fija
-`num_relax = 1` y `template_mode = "pdb100"`, y se ejecuta `Runtime → Run all`.
-La secuencia es:
+se pega la secuencia de E7 en `query_sequence`, se elige un `jobname` y se ejecuta
+la predicción con plantillas. La consigna propone `num_relax = 1` y
+`template_mode = "pdb100"`. El ZIP de esta corrida confirma `num_relax = 1` y que
+se usaron plantillas, aunque su `config.json` no guarda literalmente el valor
+elegido en el selector `template_mode`. La secuencia es:
 
 ```
 MHGDTPTLHEYMLDLQPETTDLYCYEQLNDSSEEEDEIDGPAGQAEPDRAHYNIVTFCCKCDSTLRLCVQSTHVDIRTLEDLLMGTLGIVCPICSQKP
@@ -19,44 +21,40 @@ MHGDTPTLHEYMLDLQPETTDLYCYEQLNDSSEEEDEIDGPAGQAEPDRAHYNIVTFCCKCDSTLRLCVQSTHVDIRTLE
 Controla si ColabFold usa plantillas estructurales para la predicción:
 
 - `"none"`: no usa plantillas; predice solo a partir de la secuencia y del MSA.
-- `"pdb100"`: busca plantillas en la base **PDB100** (representantes del PDB y
-  modelos de AlphaFold DB; antes se llamaba PDB70) y las usa como información
-  estructural. Es útil cuando hay homólogos estructurales conocidos.
+- `"pdb100"`: busca estructuras del PDB en la base de plantillas y las usa como
+  información estructural. Es útil cuando hay estructuras homólogas disponibles.
 - `"custom"`: permite subir plantillas propias en formato PDB o mmCIF (nombres de
   cuatro letras en minúscula); el notebook las usa para la búsqueda.
 
-**Resultados.** En este repositorio se analiza el modelo de **AlphaFold DB** para
-E7 (AF-P03129-F1, generado con ColabFold 1.5.2, 98 aa, pLDDT global 81,3), porque
-la corrida de ColabFold con plantillas requiere GPU y una sesión de Colab. El
-script `05_plddt.py` es exactamente el que se aplica al archivo
-`*_relaxed_rank_001_*.pdb` que devuelve esa corrida; si se corre con
-`template_mode="pdb100"`, los valores pueden cambiar levemente, pero la conclusión
-estructural se mantiene.
+**Resultados.** El repositorio incluye un ZIP con una corrida de ColabFold para la
+secuencia de 98 aminoácidos. Usé el modelo relajado rank 1, que corresponde al
+modelo 4 de esa corrida. El archivo de configuración registra ColabFold 1.6.3,
+plantillas activadas y `num_relax = 1`; el ZIP también guarda los nombres de las
+plantillas encontradas. No atribuyo esta corrida a la versión 1.5.2 ni a AlphaFold
+DB. El PDB suelto `datos/AF-P03129.pdb` es otro modelo: su encabezado lo identifica
+como ViRO3D, así que no lo usé para los valores de esta sección.
 
-![pLDDT y PAE de E7](resultados/fig_plddt_E7.png)
+![pLDDT y PAE de E7](resultados/fig_plddt_E7_colabfold.png)
 
 | Región | pLDDT medio | Interpretación |
 |---|---|---|
-| 1–40 | 66,1 | Baja/media; el mínimo está en 32–40 (37,8–47) → región desordenada |
-| 41–60 | 85,0 | Confiable |
-| 61–98 | **95,4** | Muy alta; 49–96 tienen pLDDT > 90 |
+| 1–40 | 66,3 | Baja/media; 32–40 queda por debajo de 50 |
+| 41–60 | 85,1 | Confiable en promedio |
+| 61–98 | **95,5** | Muy alta en promedio; 49–96 tienen pLDDT > 90 |
 
 **¿Qué regiones tienen mayor confianza?**
-El **dominio C-terminal** (aproximadamente 61–98) es la región de mayor confianza:
-pLDDT > 90 en casi toda la mitad C-terminal, con un promedio de 95,4. Es el dominio
-con los motivos de dedos de zinc (CXXC) y la estructura globular estable. La región
-**N-terminal** (1–40) tiene confianza media/baja y un tramo muy bajo entre 32 y 40,
-lo que es consistente con una región **intrínsecamente desordenada** (CR1/CR2, que
-incluye el motivo LXCXE de unión a pRb). El PAE acompaña: es alto en el extremo
-N-terminal y bajo en el dominio C-terminal, lo que indica que la orientación
-relativa del dominio C está bien determinada y la del N-terminal no.
+El **dominio C-terminal** (aproximadamente 61–98) tiene el pLDDT más alto, con un
+promedio de 95,5. La región **N-terminal** (1–40) tiene menor confianza y las
+posiciones 32–40 quedan por debajo de 50. Esto es compatible con mayor flexibilidad
+o desorden en ese tramo, pero el pLDDT mide la confianza del modelo y no es una
+medición experimental de desorden. La secuencia de E7 contiene motivos ricos en
+cisteína en el extremo C-terminal, asociados con el dominio de unión a zinc; el
+PDB modelado no incluye un ion zinc, por lo que esta predicción no verifica su
+coordinación. El PAE informa sobre la incertidumbre en la posición relativa entre
+residuos; la curva media mostrada no alcanza para afirmar por sí sola que la
+orientación global de los dominios sea correcta.
 
-Esto no es un defecto del predictor: es información biológica. E7 es una proteína
-pequeña con un extremo N desordenado que media interacciones con socios celulares
-y un dominio C estructurado que se une al zinc y dimeriza. AlphaFold2 predice con
-alta confianza lo que es estable y con baja confianza lo que es flexible.
-
-**El script `05_plddt.py`**
+**El script `src/05_plddt.py`**
 
 - Lee el archivo PDB y toma el pLDDT de la columna B-factor de los átomos CA.
 - Grafica el pLDDT por número de residuo, coloreado por banda de confianza
@@ -66,22 +64,20 @@ alta confianza lo que es estable y con baja confianza lo que es flexible.
 - Uso:
 
 ```bash
-python src/05_plddt.py resultados/colabfold/mi_run_relaxed_rank_001_alphafold2_ptm_model_1_seed_000.pdb \
-    --pae resultados/colabfold/mi_run_predicted_aligned_error_v1.json \
-    --salida resultados/fig_plddt_E7.png \
-    --csv resultados/tablas/plddt_E7.csv
+python src/05_plddt.py modelo_relajado_rank_001.pdb \
+    --pae archivo_predicted_aligned_error_v1.json \
+    --salida resultados/fig_plddt_E7_colabfold.png \
+    --csv resultados/plddt_E7_colabfold.csv
 ```
 
-**Archivos que produce ColabFold.** El notebook genera: `*_template_domain_names.json`
-(plantillas usadas), `cite.bibtex`, `config.json` (parámetros de la corrida), `*.a3m`
-(alineamiento), `*_coverage.png` (cobertura del MSA), `*_PAE.png` (mapa de PAE),
-`*_plddt.png` (pLDDT por posición), `*_predicted_aligned_error_v1.json` (valores de
-PAE), los cinco modelos `*_relaxed_*_model_*.pdb` y sus JSON con PAE/pLDDT. Los
-modelos relajados con Amber (`num_relax=1`) tienen mejor geometría local; el
-pLDDT se calcula antes de la relajación.
+**Archivos de esta corrida.** El ZIP contiene el alineamiento, los nombres de las
+plantillas, la configuración, los cinco modelos y sus métricas. Para estos
+resultados se tomó el modelo relajado rank 1 y el JSON de PAE correspondiente. La
+relajación busca mejorar la geometría local; no vuelve experimental la estructura
+ni garantiza que represente el estado funcional de E7.
 
 ---
 
 ---
 
-El contexto general, la metodología y las referencias completas están en el [informe integral](informe.md).
+El contexto, la metodología y las referencias están en el [informe integral revisado](TP_revisado.md).

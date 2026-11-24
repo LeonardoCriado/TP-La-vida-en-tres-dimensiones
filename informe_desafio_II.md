@@ -15,7 +15,7 @@ metabolismo de esteroides, ácidos biliares y fármacos.
 
 | Anotación | Posición | Relevancia |
 |---|---|---|
-| Sitio activo (dador de protones) | Y55 | Tirosina catalítica; su pKa determina la catálisis |
+| Sitio activo (dador de protones) | Y55 | Tirosina catalítica; su pKa influye en la transferencia de protones |
 | Sitio que baja el pKa de Y55 | K84 | Lisina que estabiliza la tirosinato |
 | Unión a cofactor/NADP | 20–24, 166–167, 190, 216–221, 270–280 | Bolsillo de NADP(H) |
 | Unión a sustrato/esteroide | 50, 190, 216–221 | Contactos con el anillo esteroideo |
@@ -26,12 +26,10 @@ C170Y (rs17851824), Q250R (rs4880718) y L311V (rs17134592). La variante **S145C*
 se asoció con niveles bajos de progesterona y con historia de irritabilidad
 maníaca/hipomaníaca en varones con trastorno bipolar (Johansson et al., 2011), y
 otros polimorfismos de AKR1C4 se han estudiado en relación con ideación paranoide
-durante episodios maníacos. Es importante notar que **S145 está lejos del sitio
-activo** (~20 Å de Y55/H117/K84/D50 y del NADP en 2FVL): su efecto probablemente
-no sea catalítico directo, sino de estabilidad, plegamiento o regulación. Es un
-buen ejemplo de por qué anotar una variante no es lo mismo que entender su
-mecanismo.
+durante episodios maníacos. S145 no forma parte de la tetrada catalítica anotada.
+La asociación reportada no permite establecer qué efecto estructural o funcional
+tendría la variante; para eso harían falta análisis adicionales.
 
 ---
 
-El contexto general, la metodología y las referencias completas están en el [informe integral](informe.md).
+El contexto, la metodología y las referencias están en el [informe integral revisado](TP_revisado.md).

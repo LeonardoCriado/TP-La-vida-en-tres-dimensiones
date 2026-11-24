@@ -23,54 +23,56 @@ Leonardo Criado · noviembre de 2026
 | R198 | 9,07 | 12,50 | −3,43 |
 | R217 | 10,48 | 12,50 | −2,02 |
 
-K221 está a **2,9 Å** de R217, una repulsión electrostática fuerte, y además está
-poco solvatada (el término de desolvatación es −2,69 kcal/mol): eso explica su pKa
-tan bajo. Es el mismo tipo de mecanismo que acidifica a R222 en la HSA, donde R222
-está a 4,3 Å de R218.
+K221 aparece en las cavidades 4 y 38, mientras que R217 aparece en la cavidad 5,
+4 y 38. El CSV no incluye distancias atómicas ni componentes energéticos de
+PROPKA, así que no puedo verificar con los archivos disponibles la distancia de
+2,9 Å ni el término de desolvatación citado en borradores previos. Por ese motivo,
+el pKa calculado de 5,39 se informa como predicción, sin asignarle aquí una causa
+estructural única.
 
 **La comparación con la HSA**
 
 | | HSA (1AO6A) | BSA (4JK4A) |
 |---|---|---|
 | Par de residuos del sitio | K199 / R222 | R198 / K221 |
-| Lisina catalítica (ácida) | **K199**, pKa 6,78 | **K221**, pKa 5,39 |
+| Lisina destacada en la interpretación del sitio | **K199**, pKa 6,78 | **K221**, pKa 5,39 |
 | Residuo equivalente al otro miembro del par | R222, pKa 9,16 | R198, pKa 9,07 |
-| Cavidad que contiene la lisina catalítica | cavidad 1 (2656 Å³, 0,955) | cavidad 4 (364 Å³, 0,086) |
+| Cavidad que contiene la lisina destacada | cavidad 1 (2656 Å³, 0,955) | cavidad 4 (364 Å³, 0,086) |
 | Cavidad principal del sitio AII | cavidad 1 (drogable) | cavidad 5 (1350 Å³, 0,893) |
 
-La conclusión es que el sitio activo de la albúmina **no está simplemente
-"corrido"**: está **invertido**. En la HSA el par es Lys/Arg (K199/R222) y la lisina
-ácida es K199; en la BSA el par es Arg/Lys (R198/K221) y la lisina ácida es K221.
-Los dos residuos intercambiaron sus posiciones funcionales, y la selección natural
-mantuvo un par ácido/base con pKa anómalos en ambos casos. Es una adaptación
-interesante: lo que se conserva no es la identidad de los residuos, sino la
-**propiedad fisicoquímica** (un residuo básico con pKa bajo) y la geometría de la
-cavidad.
+La publicación comparativa de albúminas describe una inversión del par de residuos
+de este sitio entre HSA y BSA. Los resultados de esta corrida son compatibles con
+esa interpretación: en las posiciones reportadas, K199 de HSA y K221 de BSA tienen
+pKa calculados menores que los valores de referencia. Sin un alineamiento
+estructural y sin medir actividad, estos resultados no bastan para concluir que los
+residuos hayan intercambiado su función ni que la evolución haya conservado un
+mecanismo determinado.
 
-Las diferencias de drogabilidad también son sugerentes: en la HSA la lisina
-catalítica está dentro de la cavidad principal, grande y drogable; en la BSA está
-en una subcavidad más pequeña y no drogable, en el borde de la cavidad principal.
-Eso podría explotarse para diseñar ligandos selectivos de especie, aunque hay que
-tomarlo con cautela porque fpocket puede partir un sitio grande en subcavidades
-según la forma del bolsillo.
+En los resultados geométricos, K199 de HSA está en la cavidad 1 y K221 de BSA en
+las cavidades 4 y 38, no en la cavidad principal 5. Esto muestra que fpocket dividió
+las regiones de manera distinta en estas dos estructuras. No alcanza para concluir
+que los sitios tengan diferente afinidad o que se puedan diseñar ligandos selectivos
+entre especies.
 
-**Comparación con la literatura.** El trabajo del grupo de la UNQ (Biochimie, 2022)
-describe exactamente esta inversión y reporta pKa promedio de ~7,51 para K199 y
-~9,49 para R222 en HSA, y ~9,24 para R198 y ~7,27 para K221 en BSA. Nuestros
-valores son más ácidos (6,78; 9,16; 9,07; 5,39), pero la tendencia y la inversión
-se reproducen. La diferencia cuantitativa es esperable por la metodología (una
-conformación, sin hidrógenos, PROPKA 3.5.1).
+**Comparación con la literatura.** El estudio de Velez Rueda et al. [14] propone una
+inversión del sitio entre HSA y BSA y reporta pKa calculados aproximados de 7,51
+(K199) y 9,49 (R222) para HSA, y 9,24 (R198) y 7,27 (K221) para BSA. Nuestros
+valores de PROPKA son 6,78; 9,16; 9,07 y 5,39, respectivamente. Los valores
+publicados también son predicciones, no mediciones. La diferencia, sobre todo para
+K221, indica que estos cálculos dependen de la estructura y la preparación usadas;
+no conviene presentarla como una reproducción cuantitativa del estudio.
 
 **Respuestas puntuales**
 
 - *¿Cuántas cavidades tiene 4JK4A?* 41; 3 drogables.
 - *¿Dónde está K221?* En las cavidades 4 (364 Å³, no drogable) y 38 (566 Å³, no
   drogable), no en la cavidad principal 5.
-- *¿Cómo se compara con la HSA?* El sitio está invertido: la lisina catalítica es
-  K221 en BSA y K199 en HSA; ambas tienen pKa anormalmente bajos (5,39 y 6,78),
-  pero la de BSA está en una subcavidad pequeña y no drogable, mientras que la de
-  HSA está en la cavidad principal drogable.
+- *¿Cómo se compara con la HSA?* La literatura propone una inversión de los
+  residuos del sitio entre las dos albúminas. En nuestros cálculos, K199 y K221
+  tienen pKa predichos de 6,78 y 5,39. La cavidad que contiene cada residuo difiere,
+  pero fpocket no permite por sí solo concluir qué efecto funcional tiene esa
+  diferencia.
 
 ---
 
-El contexto general, la metodología y las referencias completas están en el [informe integral](informe.md).
+El contexto, la metodología y las referencias están en el [informe integral revisado](TP_revisado.md).

@@ -5,7 +5,7 @@ albúminas y predicción de estructura con AlphaFold2/ColabFold.
 
 **Autor:** Leonardo Criado · **Fecha:** noviembre de 2026
 
-El [informe integral](informe.md) reúne el desarrollo completo. Para leer cada consigna por separado, están los informes de los [desafíos I](informe_desafio_I.md), [II](informe_desafio_II.md), [III](informe_desafio_III.md), [IV](informe_desafio_IV.md), [V](informe_desafio_V.md) y [VI](informe_desafio_VI.md).
+El [informe integral revisado](TP_revisado.md) reúne el desarrollo completo. Para leer cada consigna por separado, están los informes de los [desafíos I](informe_desafio_I.md), [II](informe_desafio_II.md), [III](informe_desafio_III.md), [IV](informe_desafio_IV.md), [V](informe_desafio_V.md) y [VI](informe_desafio_VI.md). El [diagnóstico de revisión](diagnostico_revision.md) resume los hallazgos.
 
 ---
 
@@ -14,12 +14,12 @@ El [informe integral](informe.md) reúne el desarrollo completo. Para leer cada 
 | Consigna | Resultado principal |
 |---|---|
 | 1UBQ | X-ray 1,8 Å, 76 aa, una cadena, 602 átomos, R = 0,176 |
-| Desafío I — EGFR | 1M14 (activo): sitio ATP abierto y fragmentado; 3W32 (inactivo): cavidad única de 711 Å³, druggability 0,93 |
-| Desafío II — AKR1C4 | UniProt P17516: Y55 sitio activo, K84 modula su pKa, tetrada D50/Y55/K84/H117; variante S145C asociada a bipolaridad |
+| Desafío I — EGFR | fpocket reparte la región ATP entre cavidades en 1M14; detecta cavidad 1 de 710,7 Å³ y score 0,932 en 3W32 |
+| Desafío II — AKR1C4 | UniProt P17516: Y55 sitio activo, K84 modula su pKa, tetrada D50/Y55/K84/H117; S145C se estudió en relación con progesterona y bipolaridad |
 | Desafío III — 2FVLB | 21 cavidades, 1 drogable (988 Å³, druggability 0,85) que coincide con el sitio catalítico/NADP |
-| Desafío IV — 1AO6A | 36 cavidades, 2 drogables; cavidad 1 = sitio AII (K199/R222), activada (K199 pKa 6,78) |
-| Desafío V — 4JK4A | 41 cavidades, 3 drogables; K221 tiene pKa 5,39 y el sitio está invertido respecto de HSA |
-| Desafío VI — E7 | pLDDT medio 81,3; dominio C-terminal 95,4; región N-terminal desordenada (32–40 < 50) |
+| Desafío IV — 1AO6A | 36 cavidades; PROPKA predice pKa 6,78 para K199 y 9,16 para R222 en la cavidad 1 |
+| Desafío V — 4JK4A | 41 cavidades; PROPKA predice pKa 5,39 para K221; se discute la inversión propuesta en la literatura |
+| Desafío VI — E7 | ColabFold 1.6.3, modelo rank 1: pLDDT medio 81,5; 61–98: 95,5; 1–40: 66,3 |
 
 ---
 
@@ -27,7 +27,9 @@ El [informe integral](informe.md) reúne el desarrollo completo. Para leer cada 
 
 ```
 .
-├── informe.md                     # informe integral
+├── TP_revisado.md                 # informe integral corregido
+├── diagnostico_revision.md        # diagnóstico de la primera etapa
+├── informe.md                     # original conservado
 ├── informe_desafio_I.md           # EGFR en dos conformeros
 ├── informe_desafio_II.md          # AKR1C4 en UniProt
 ├── informe_desafio_III.md         # cavidades de AKR1C4
@@ -38,8 +40,9 @@ El [informe integral](informe.md) reúne el desarrollo completo. Para leer cada 
 ├── environment.yml                # entorno con fpocket, PROPKA y Python
 ├── datos/
 │   ├── 1UBQ.pdb                   # ubiquitina
-│   ├── AF-P03129.pdb              # modelo AlphaFold DB de E7 (HPV16)
-│   ├── PAE_P03129.json            # PAE del mismo modelo
+│   ├── AF-P03129.pdb              # modelo ViRO3D de E7 (HPV16)
+│   ├── PAE_P03129.json            # PAE de ese modelo
+│   ├── test_3b510.result.zip      # corrida ColabFold usada en TP_revisado
 │   └── estructuras/               # cadenas usadas en el análisis de cavidades
 ├── src/
 │   ├── 01_descargar_estructuras.sh   # baja los PDB y arma las cadenas
@@ -50,11 +53,13 @@ El [informe integral](informe.md) reúne el desarrollo completo. Para leer cada 
 └── resultados/
     ├── fig_cavidades_albuminas.png
     ├── fig_cavidades_egfr.png
-    ├── fig_plddt_E7.png
+    ├── fig_plddt_E7.png            # modelo ViRO3D anterior
+    ├── fig_plddt_E7_colabfold.png  # ColabFold rank 1 del ZIP
     ├── cavidades.csv
     ├── cavidades_resumen.csv
     ├── pka.csv
-    └── plddt_E7.csv
+    ├── plddt_E7.csv                # modelo ViRO3D anterior
+    └── plddt_E7_colabfold.csv      # ColabFold rank 1 del ZIP
 ```
 
 ---
@@ -74,10 +79,11 @@ python src/03_analizar_cavidades.py
 
 # 4) gráficos
 python src/04_figuras_cavidades.py
-python src/05_plddt.py datos/AF-P03129.pdb \
-    --pae datos/PAE_P03129.json \
-    --salida resultados/fig_plddt_E7.png \
-    --csv resultados/plddt_E7.csv
+unzip -q datos/test_3b510.result.zip -d /tmp/tp-colabfold
+python src/05_plddt.py /tmp/tp-colabfold/test_3b510/test_3b510_relaxed_rank_001_alphafold2_ptm_model_4_seed_000.pdb \
+    --pae /tmp/tp-colabfold/test_3b510/test_3b510_predicted_aligned_error_v1.json \
+    --salida resultados/fig_plddt_E7_colabfold.png \
+    --csv resultados/plddt_E7_colabfold.csv
 ```
 
 El análisis de cavidades tarda unos minutos: fpocket corre sobre cada cadena y
@@ -93,18 +99,18 @@ la raíz del repositorio, instalan las dependencias y se vuelven a ejecutar solo
 ## Notas metodológicas
 
 - **CaviDB** no estaba disponible al momento de hacer el TP (el dominio no
-  respondía). Para no dejar los desafíos sin datos, se reprodujo su pipeline con
-  las mismas herramientas que documenta la base: **fpocket 4.2.3** (cavidades) y
-  **PROPKA 3.5.1** (pKa). Los valores publicados de CaviDB se citan en el informe
-  para comparar.
+  respondía). Se hizo un análisis independiente con **fpocket 4.2.3** (cavidades)
+  y **PROPKA 3.5.1** (pKa), herramientas que también usa la base. No se afirma que
+  sea una réplica exacta de todos sus pasos.
 - Las cavidades se calcularon sobre cadenas aisladas y **sin aguas ni ligandos**,
   para comparar conformeros en las mismas condiciones. Los volúmenes pueden variar
   levemente entre corridas de fpocket.
-- El modelo de E7 incluido es el de **AlphaFold DB** (`AF-P03129-F1`, generado con
-  ColabFold 1.5.2). La corrida de ColabFold con `num_relax=1` y
-  `template_mode="pdb100"` se hace en el notebook de ColabFold; el script
-  `05_plddt.py` se aplica directamente al archivo
-  `*_relaxed_rank_001_*.pdb` que devuelve esa corrida.
+- El archivo `datos/AF-P03129.pdb` corresponde a ViRO3D, según su encabezado. Para
+  el informe revisado se usó el modelo relajado rank 1 guardado en
+  `datos/test_3b510.result.zip`; la configuración incluida indica ColabFold 1.6.3,
+  plantillas activadas y `num_relax=1`. Los nuevos valores están en
+  `resultados/plddt_E7_colabfold.csv` y la figura asociada. Los archivos anteriores
+  de pLDDT se conservaron.
 
 ## Consigna original
 
