@@ -5,8 +5,7 @@ albúminas y predicción de estructura con AlphaFold2/ColabFold.
 
 **Autor:** Leonardo Criado · **Fecha:** noviembre de 2026
 
-El informe completo, con las respuestas a todas las consignas y a los desafíos I–VI,
-está en **[`informe.md`](informe.md)**.
+El [informe integral](informe.md) reúne el desarrollo completo. Para leer cada consigna por separado, están los informes de los [desafíos I](informe_desafio_I.md), [II](informe_desafio_II.md), [III](informe_desafio_III.md), [IV](informe_desafio_IV.md), [V](informe_desafio_V.md) y [VI](informe_desafio_VI.md).
 
 ---
 
@@ -28,23 +27,34 @@ está en **[`informe.md`](informe.md)**.
 
 ```
 .
-├── informe.md                     # informe completo
+├── informe.md                     # informe integral
+├── informe_desafio_I.md           # EGFR en dos conformeros
+├── informe_desafio_II.md          # AKR1C4 en UniProt
+├── informe_desafio_III.md         # cavidades de AKR1C4
+├── informe_desafio_IV.md          # albúmina humana
+├── informe_desafio_V.md           # albúmina bovina
+├── informe_desafio_VI.md          # E7 del VPH16
 ├── README.md
 ├── environment.yml                # entorno con fpocket, PROPKA y Python
-├── data/
+├── datos/
 │   ├── 1UBQ.pdb                   # ubiquitina
 │   ├── AF-P03129.pdb              # modelo AlphaFold DB de E7 (HPV16)
 │   ├── PAE_P03129.json            # PAE del mismo modelo
 │   └── estructuras/               # cadenas usadas en el análisis de cavidades
-├── scripts/
-│   ├── descargar_estructuras.sh   # baja los PDB y arma las cadenas
-│   ├── explorar_pdb.py            # anatomía de un archivo PDB (1UBQ)
-│   ├── analizar_cavidades.py      # fpocket + PROPKA -> tablas
-│   ├── figuras_cavidades.py       # gráficos de cavidades
-│   └── plot_plddt.py              # pLDDT (y PAE) por posición
+├── src/
+│   ├── 01_descargar_estructuras.sh   # baja los PDB y arma las cadenas
+│   ├── 02_explorar_pdb.py            # anatomía de un archivo PDB (1UBQ)
+│   ├── 03_analizar_cavidades.py      # fpocket + PROPKA -> tablas
+│   ├── 04_figuras_cavidades.py       # gráficos de cavidades
+│   └── 05_plddt.py              # pLDDT (y PAE) por posición
 └── resultados/
-    ├── figuras/                   # pLDDT, cavidades EGFR y albúminas
-    └── tablas/                    # cavidades.csv, pka.csv, plddt_E7.csv
+    ├── fig_cavidades_albuminas.png
+    ├── fig_cavidades_egfr.png
+    ├── fig_plddt_E7.png
+    ├── cavidades.csv
+    ├── cavidades_resumen.csv
+    ├── pka.csv
+    └── plddt_E7.csv
 ```
 
 ---
@@ -57,21 +67,21 @@ conda env create -f environment.yml
 conda activate tp-estructural
 
 # 2) estructuras
-bash scripts/descargar_estructuras.sh
+bash src/01_descargar_estructuras.sh
 
 # 3) análisis de cavidades y pKa
-python scripts/analizar_cavidades.py
+python src/03_analizar_cavidades.py
 
 # 4) gráficos
-python scripts/figuras_cavidades.py
-python scripts/plot_plddt.py data/AF-P03129.pdb \
-    --pae data/PAE_P03129.json \
-    --salida resultados/figuras/plddt_E7.png \
-    --csv resultados/tablas/plddt_E7.csv
+python src/04_figuras_cavidades.py
+python src/05_plddt.py datos/AF-P03129.pdb \
+    --pae datos/PAE_P03129.json \
+    --salida resultados/fig_plddt_E7.png \
+    --csv resultados/plddt_E7.csv
 ```
 
 El análisis de cavidades tarda unos minutos: fpocket corre sobre cada cadena y
-PROPKA calcula los pKa. Los resultados quedan en `resultados/tablas/`.
+PROPKA calcula los pKa. Los resultados quedan en `resultados/`.
 
 ---
 
@@ -88,7 +98,7 @@ PROPKA calcula los pKa. Los resultados quedan en `resultados/tablas/`.
 - El modelo de E7 incluido es el de **AlphaFold DB** (`AF-P03129-F1`, generado con
   ColabFold 1.5.2). La corrida de ColabFold con `num_relax=1` y
   `template_mode="pdb100"` se hace en el notebook de ColabFold; el script
-  `plot_plddt.py` se aplica directamente al archivo
+  `05_plddt.py` se aplica directamente al archivo
   `*_relaxed_rank_001_*.pdb` que devuelve esa corrida.
 
 ## Consigna original

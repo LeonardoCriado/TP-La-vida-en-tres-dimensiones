@@ -6,7 +6,7 @@ heteroatomos y reconstruye la secuencia desde los registros ATOM y SEQRES.
 Es el codigo que respalda la seccion "Un problema estructural" del informe.
 
 Uso:
-    python scripts/explorar_pdb.py data/1UBQ.pdb
+    python src/02_explorar_pdb.py datos/1UBQ.pdb
 """
 
 import argparse

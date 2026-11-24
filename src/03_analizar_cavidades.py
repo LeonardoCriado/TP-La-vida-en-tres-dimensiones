@@ -2,7 +2,7 @@
 """
 Analisis de cavidades estilo CaviDB: fpocket + PROPKA.
 
-Para cada estructura de data/estructuras/*.pdb corre fpocket (deteccion de
+Para cada estructura de datos/estructuras/*.pdb corre fpocket (deteccion de
 cavidades) y PROPKA (pKa de residuos ionizables), y arma una tabla con:
 
   - descriptores de cada cavidad (score, druggability, volumen, residuos)
@@ -11,10 +11,10 @@ cavidades) y PROPKA (pKa de residuos ionizables), y arma una tabla con:
     de CaviDB.
 
 Uso:
-    python scripts/analizar_cavidades.py --estructuras data/estructuras \
-        --salida resultados/tablas
+    python src/03_analizar_cavidades.py --estructuras datos/estructuras \
+        --salida resultados
 
-Requiere fpocket y propka3 en el PATH (ver environment.yml).
+Requiere fpocket y propka3 en el PATH (ver README).
 """
 
 import argparse
@@ -163,8 +163,8 @@ def resumen_estructura(pdb, cwd, salida_dir):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--estructuras", default="data/estructuras")
-    ap.add_argument("--salida", default="resultados/tablas")
+    ap.add_argument("--estructuras", default="datos/estructuras")
+    ap.add_argument("--salida", default="resultados")
     args = ap.parse_args()
 
     dir_est = Path(args.estructuras).resolve()

@@ -8,8 +8,8 @@ residuo). Este script lo lee, lo grafica coloreado por nivel de confianza y
 escribe un CSV con los valores por residuo.
 
 Uso:
-    python scripts/plot_plddt.py modelo.pdb
-    python scripts/plot_plddt.py resultados/colabfold/*_relaxed_rank_001_*.pdb
+    python src/05_plddt.py modelo.pdb
+    python src/05_plddt.py resultados/*_relaxed_rank_001_*.pdb
 
 Opcional:
     --pae archivo_predicted_aligned_error.json   (grafica tambien el PAE medio)

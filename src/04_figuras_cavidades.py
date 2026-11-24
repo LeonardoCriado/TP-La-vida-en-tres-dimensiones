@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-Graficos de cavidades a partir de resultados/tablas/cavidades.csv.
+Graficos de cavidades a partir de resultados/cavidades.csv.
 
 Genera dos figuras:
-  - cavidades_egfr.png      (1M14 vs 3W32)
-  - cavidades_albuminas.png (1AO6 vs 4JK4)
+  - fig_cavidades_egfr.png      (1M14 vs 3W32)
+  - fig_cavidades_albuminas.png (1AO6 vs 4JK4)
 
 Las barras se colorean por druggability (rojo > 0.5) y se marcan las cavidades
 que contienen los residuos de interes.
 
 Uso:
-    python scripts/figuras_cavidades.py
+    python src/04_figuras_cavidades.py
 """
 
 import argparse
@@ -25,7 +25,7 @@ import numpy as np
 
 GRUPOS = [
     {
-        "archivo": "cavidades_egfr.png",
+        "archivo": "fig_cavidades_egfr.png",
         "titulo": "EGFR: conformero activo (1M14) vs inactivo (3W32)",
         "estructuras": [
             ("1M14_A", "1M14 (activo, apo)", {18: "sitio ATP", 2: "D837 (D813)"}),
@@ -33,7 +33,7 @@ GRUPOS = [
         ],
     },
     {
-        "archivo": "cavidades_albuminas.png",
+        "archivo": "fig_cavidades_albuminas.png",
         "titulo": "Albúminas: HSA (1AO6) vs BSA (4JK4)",
         "estructuras": [
             ("1AO6_A", "HSA 1AO6 (cadena A)", {1: "K199/R222", 2: "R410/Y411"}),
@@ -80,8 +80,8 @@ def graficar(ax, filas, etiqueta, resaltadas):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--tabla", default="resultados/tablas/cavidades.csv")
-    ap.add_argument("--salida", default="resultados/figuras")
+    ap.add_argument("--tabla", default="resultados/cavidades.csv")
+    ap.add_argument("--salida", default="resultados")
     args = ap.parse_args()
     filas = leer_tabla(args.tabla)
     salida = Path(args.salida)
