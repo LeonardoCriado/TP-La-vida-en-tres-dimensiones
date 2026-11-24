@@ -11,11 +11,59 @@ que contienen los residuos de interes.
 
 Uso:
     python src/04_figuras_cavidades.py
+
+Si faltan numpy o matplotlib, el script crea un entorno virtual .venv en la raiz
+del repositorio, instala las dependencias y se vuelve a ejecutar solo.
 """
 
 import argparse
 import csv
+import os
+import subprocess
+import sys
 from pathlib import Path
+
+DEPENDENCIAS = ("numpy", "matplotlib")
+
+
+def asegurar_dependencias():
+    """Instala numpy y matplotlib en un .venv local si no estan disponibles."""
+    try:
+        import matplotlib  # noqa: F401
+        import numpy  # noqa: F401
+        return
+    except ImportError:
+        pass
+
+    venv = Path(__file__).resolve().parent.parent / ".venv"
+    python = venv / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
+    script = str(Path(__file__).resolve())
+
+    # si el .venv ya tiene las dependencias, reejecutar sin instalar nada
+    if python.exists():
+        listo = subprocess.run([str(python), "-c", "import numpy, matplotlib"],
+                               capture_output=True).returncode == 0
+        if listo:
+            os.execv(str(python), [str(python), script, *sys.argv[1:]])
+
+    if not python.exists():
+        print("Faltan numpy y/o matplotlib: creando entorno virtual en .venv ...",
+              flush=True)
+        subprocess.run([sys.executable, "-m", "venv", str(venv)], check=True)
+    print("Instalando numpy y matplotlib en .venv ...", flush=True)
+    subprocess.run([str(python), "-m", "pip", "install", "--quiet",
+                    "--disable-pip-version-check", *DEPENDENCIAS], check=True)
+
+    listo = subprocess.run([str(python), "-c", "import numpy, matplotlib"],
+                           capture_output=True).returncode == 0
+    if not listo:
+        sys.exit("No pude importar numpy y matplotlib desde .venv; "
+                 "revisa el error de pip de arriba.")
+    print("Reejecutando el script con el entorno nuevo ...", flush=True)
+    os.execv(str(python), [str(python), script, *sys.argv[1:]])
+
+
+asegurar_dependencias()
 
 import matplotlib
 

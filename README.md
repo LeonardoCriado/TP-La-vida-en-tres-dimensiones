@@ -83,6 +83,11 @@ python src/05_plddt.py datos/AF-P03129.pdb \
 El análisis de cavidades tarda unos minutos: fpocket corre sobre cada cadena y
 PROPKA calcula los pKa. Los resultados quedan en `resultados/`.
 
+Si no tenés `numpy`/`matplotlib` instalados, los scripts de gráficos
+(`04_figuras_cavidades.py` y `05_plddt.py`) crean un entorno virtual `.venv` en
+la raíz del repositorio, instalan las dependencias y se vuelven a ejecutar solos
+(la primera vez necesitan conexión a internet).
+
 ---
 
 ## Notas metodológicas
