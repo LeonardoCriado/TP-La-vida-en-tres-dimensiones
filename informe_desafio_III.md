@@ -11,7 +11,7 @@ Leonardo Criado · noviembre de 2026
 a 2,4 Å. Se eliminó el NADP para el análisis, de modo que el bolsillo del cofactor
 queda vacío.
 
-> **Nota de contexto y reproducción (para la cátedra).** Cuando hice el trabajo,
+> **Nota :** Cuando hice el trabajo,
 > CaviDB no respondía y no pude consultar sus resultados directamente. Para analizar
 > las cavidades usé fpocket 4.2.3, que detecta bolsillos y calcula descriptores como
 > el volumen y el *druggability score*. Con esto reproduje esa parte del análisis,
