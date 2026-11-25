@@ -5,6 +5,8 @@ Leonardo Criado · noviembre de 2026
 
 ### Desafío II — AKR1C4 en UniProt
 
+> **Consigna original (resumida):** Consultar UniProt y anotar los sitios de AKR1C4 que tienen relevancia biológica. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
+
 **Proteína:** aldo-keto reductasa familia 1, miembro C4 (AKR1C4; UniProt
 [P17516](https://www.uniprot.org/uniprotkb/P17516/entry)), 323 aminoácidos.
 Es una enzima citosólica dependiente de NADPH que reduce cetosteroides a
@@ -31,5 +33,3 @@ La asociación reportada no permite establecer qué efecto estructural o funcion
 tendría la variante; para eso harían falta análisis adicionales.
 
 ---
-
-El contexto, la metodología y las referencias están en el [informe integral revisado](TP_revisado.md).

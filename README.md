@@ -13,13 +13,13 @@ El desarrollo está organizado por consigna en los informes de los [desafíos I]
 
 | Consigna | Resultado principal |
 |---|---|
-| 1UBQ | X-ray 1,8 Å, 76 aa, una cadena, 602 átomos, R = 0,176 |
+| 1UBQ | Difracción de rayos X a 1,8 Å, 76 aa, una cadena, 602 átomos, R = 0,176 |
 | Desafío I — EGFR | fpocket reparte la región ATP entre cavidades en 1M14; detecta cavidad 1 de 710,7 Å³ y score 0,932 en 3W32 |
 | Desafío II — AKR1C4 | UniProt P17516: Y55 sitio activo, K84 modula su pKa, tetrada D50/Y55/K84/H117; S145C se estudió en relación con progesterona y bipolaridad |
 | Desafío III — 2FVLB | 21 cavidades, 1 drogable (988 Å³, druggability 0,85) que coincide con el sitio catalítico/NADP |
 | Desafío IV — 1AO6A | 36 cavidades; PROPKA predice pKa 6,78 para K199 y 9,16 para R222 en la cavidad 1 |
 | Desafío V — 4JK4A | 41 cavidades; PROPKA predice pKa 5,39 para K221; se discute la inversión propuesta en la literatura |
-| Desafío VI — E7 | ColabFold 1.6.3, modelo rank 1: pLDDT medio 81,5; 61–98: 95,5; 1–40: 66,3 |
+| Desafío VI — E7 | ColabFold 1.6.3, modelo que quedó primero: pLDDT medio 81,5; 61–98: 95,5; 1–40: 66,3 |
 
 ---
 
@@ -51,12 +51,12 @@ El desarrollo está organizado por consigna en los informes de los [desafíos I]
     ├── fig_cavidades_albuminas.png
     ├── fig_cavidades_egfr.png
     ├── fig_plddt_E7.png            # modelo ViRO3D anterior
-    ├── fig_plddt_E7_colabfold.png  # ColabFold rank 1 del ZIP
+    ├── fig_plddt_E7_colabfold.png  # modelo que quedó primero en la corrida de ColabFold
     ├── cavidades.csv
     ├── cavidades_resumen.csv
     ├── pka.csv
     ├── plddt_E7.csv                # modelo ViRO3D anterior
-    └── plddt_E7_colabfold.csv      # ColabFold rank 1 del ZIP
+    └── plddt_E7_colabfold.csv      # modelo que quedó primero en la corrida de ColabFold
 ```
 
 ---
@@ -103,9 +103,9 @@ la raíz del repositorio, instalan las dependencias y se vuelven a ejecutar solo
   para comparar conformeros en las mismas condiciones. Los volúmenes pueden variar
   levemente entre corridas de fpocket.
 - El archivo `datos/AF-P03129.pdb` corresponde a ViRO3D, según su encabezado. Para
-  el desafío VI se usó el modelo relajado rank 1 guardado en
-  `datos/test_3b510.result.zip`; la configuración incluida indica ColabFold 1.6.3,
-  plantillas activadas y `num_relax=1`. Los nuevos valores están en
+  el desafío VI analicé el modelo que quedó primero en la corrida de ColabFold
+  (rank 1, modelo 4), guardado en `datos/test_3b510.result.zip`. La configuración
+  indica ColabFold 1.6.3, que se usaron plantillas y `num_relax=1`. Los valores están en
   `resultados/plddt_E7_colabfold.csv` y la figura asociada. Los archivos anteriores
   de pLDDT se conservaron.
 

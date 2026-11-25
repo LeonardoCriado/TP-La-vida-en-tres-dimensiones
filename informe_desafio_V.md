@@ -5,6 +5,8 @@ Leonardo Criado · noviembre de 2026
 
 ### Desafío V — La albúmina bovina (4JK4A) y la inversión del sitio
 
+> **Consigna original (resumida):** Analizar en CaviDB las cavidades de 4JK4A, su tamaño y su relación con residuos relevantes; comparar el sitio con HSA. También se propone investigar la inversión del sitio en albúminas y su posible relación evolutiva. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
+
 **Estructura:** 4JK4, cadena A, albúmina sérica bovina (BSA) en complejo con ácido
 3,5-diiodosalicílico, 2,65 Å. Se eliminaron los ligandos para el análisis.
 
@@ -23,12 +25,10 @@ Leonardo Criado · noviembre de 2026
 | R198 | 9,07 | 12,50 | −3,43 |
 | R217 | 10,48 | 12,50 | −2,02 |
 
-K221 aparece en las cavidades 4 y 38, mientras que R217 aparece en la cavidad 5,
-4 y 38. El CSV no incluye distancias atómicas ni componentes energéticos de
-PROPKA, así que no puedo verificar con los archivos disponibles la distancia de
-2,9 Å ni el término de desolvatación citado en borradores previos. Por ese motivo,
-el pKa calculado de 5,39 se informa como predicción, sin asignarle aquí una causa
-estructural única.
+K221 aparece en las cavidades 4 y 38; R217 aparece en las cavidades 4, 5 y 38.
+Los archivos disponibles no incluyen el cálculo de la distancia de 2,9 Å ni el
+término de desolvatación mencionado en borradores previos. Por eso informo el pKa
+de 5,39 como una predicción y no le asigno una causa estructural única.
 
 **La comparación con la HSA**
 
@@ -41,10 +41,10 @@ estructural única.
 | Cavidad principal del sitio AII | cavidad 1 (drogable) | cavidad 5 (1350 Å³, 0,893) |
 
 La publicación comparativa de albúminas describe una inversión del par de residuos
-de este sitio entre HSA y BSA. Los resultados de esta corrida son compatibles con
-esa interpretación: en las posiciones reportadas, K199 de HSA y K221 de BSA tienen
-pKa calculados menores que los valores de referencia. Sin un alineamiento
-estructural y sin medir actividad, estos resultados no bastan para concluir que los
+de este sitio entre HSA y BSA. Mis resultados coinciden con esa interpretación,
+aunque no la prueban por sí solos. En las posiciones reportadas, K199 de HSA y
+K221 de BSA tienen pKa calculados menores que los valores de referencia. Sin un
+alineamiento estructural y sin medir actividad, estos resultados no bastan para concluir que los
 residuos hayan intercambiado su función ni que la evolución haya conservado un
 mecanismo determinado.
 
@@ -60,7 +60,7 @@ inversión del sitio entre HSA y BSA y reporta pKa calculados aproximados de 7,5
 valores de PROPKA son 6,78; 9,16; 9,07 y 5,39, respectivamente. Los valores
 publicados también son predicciones, no mediciones. La diferencia, sobre todo para
 K221, indica que estos cálculos dependen de la estructura y la preparación usadas;
-no conviene presentarla como una reproducción cuantitativa del estudio.
+no la considero una reproducción cuantitativa del estudio.
 
 **Respuestas puntuales**
 
@@ -74,5 +74,3 @@ no conviene presentarla como una reproducción cuantitativa del estudio.
   diferencia.
 
 ---
-
-El contexto, la metodología y las referencias están en el [informe integral revisado](TP_revisado.md).

@@ -5,6 +5,8 @@ Leonardo Criado · noviembre de 2026
 
 ### Desafío IV — La albúmina humana (1AO6A)
 
+> **Consigna original (resumida):** Consultar CaviDB para la estructura 1AO6A, contar y comparar las cavidades, revisar su solapamiento con residuos de interés y analizar si hay una cavidad potencialmente activada según los pKa. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
+
 **Estructura:** 1AO6, cadena A, albúmina sérica humana (HSA), 2,5 Å, sin ligandos
 (albúmina "defatted"). La HSA tiene tres dominios homólogos (I, II y III), cada uno
 con dos subdominios (A y B); los sitios de unión a fármacos más importantes son el
@@ -48,7 +50,7 @@ respecto de los valores de referencia es 40,57; no es un pKa ni una medida direc
 de actividad. En particular, PROPKA predice valores menores que los de referencia
 para K199 (6,78) y R222 (9,16). Un pKa desplazado indica que el entorno estructural
 podría modificar su protonación. CaviDB usa estos desplazamientos para señalar
-cavidades potencialmente activadas, pero este cálculo por sí solo no prueba que
+cavidades que podrían estar activadas, pero este cálculo no demuestra que
 K199 o R222 catalicen una reacción ni explica el mecanismo.
 
 La **cavidad 2** (zona AIII) tiene 6 residuos ionizables, rango 11,19–13,51,
@@ -77,5 +79,3 @@ parámetros del análisis publicado.
   11,19–13,51 (promedio 12,23).
 
 ---
-
-El contexto, la metodología y las referencias están en el [informe integral revisado](TP_revisado.md).

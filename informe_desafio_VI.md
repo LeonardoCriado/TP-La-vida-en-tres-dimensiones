@@ -5,6 +5,8 @@ Leonardo Criado · noviembre de 2026
 
 ### Desafío VI — E7 del VPH16 con ColabFold
 
+> **Consigna original (resumida):** Predecir la estructura de E7 con ColabFold usando una plantilla de PDB y una relajación; explicar las opciones utilizadas, identificar las regiones de mayor confianza y describir el script para analizar pLDDT. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
+
 **Procedimiento en ColabFold.** Se abre el notebook
 [AlphaFold2.ipynb](https://colab.research.google.com/github/sokrypton/ColabFold/blob/main/AlphaFold2.ipynb),
 se pega la secuencia de E7 en `query_sequence`, se elige un `jobname` y se ejecuta
@@ -27,8 +29,8 @@ Controla si ColabFold usa plantillas estructurales para la predicción:
   cuatro letras en minúscula); el notebook las usa para la búsqueda.
 
 **Resultados.** El repositorio incluye un ZIP con una corrida de ColabFold para la
-secuencia de 98 aminoácidos. Usé el modelo relajado rank 1, que corresponde al
-modelo 4 de esa corrida. El archivo de configuración registra ColabFold 1.6.3,
+secuencia de 98 aminoácidos. Analicé el modelo que quedó primero en la clasificación
+de la corrida (rank 1, modelo 4). El archivo de configuración registra ColabFold 1.6.3,
 plantillas activadas y `num_relax = 1`; el ZIP también guarda los nombres de las
 plantillas encontradas. No atribuyo esta corrida a la versión 1.5.2 ni a AlphaFold
 DB. El PDB suelto `datos/AF-P03129.pdb` es otro modelo: su encabezado lo identifica
@@ -70,14 +72,11 @@ python src/05_plddt.py modelo_relajado_rank_001.pdb \
     --csv resultados/plddt_E7_colabfold.csv
 ```
 
-**Archivos de esta corrida.** El ZIP contiene el alineamiento, los nombres de las
+**Archivos de la corrida.** El ZIP contiene el alineamiento, los nombres de las
 plantillas, la configuración, los cinco modelos y sus métricas. Para estos
-resultados se tomó el modelo relajado rank 1 y el JSON de PAE correspondiente. La
-relajación busca mejorar la geometría local; no vuelve experimental la estructura
-ni garantiza que represente el estado funcional de E7.
+resultados usé el modelo que quedó primero en la clasificación (rank 1) y el JSON
+de PAE correspondiente. La relajación busca mejorar la geometría local, pero no
+convierte la predicción en una estructura experimental ni garantiza que represente
+el estado funcional de E7.
 
 ---
-
----
-
-El contexto, la metodología y las referencias están en el [informe integral revisado](TP_revisado.md).
