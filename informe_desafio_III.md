@@ -11,29 +11,28 @@ Leonardo Criado · noviembre de 2026
 a 2,4 Å. Se eliminó el NADP para el análisis, de modo que el bolsillo del cofactor
 queda vacío.
 
-**Método alternativo.** Cuando hicimos el trabajo, CaviDB no respondía y no pudimos
-consultar sus resultados directamente. Para analizar las cavidades usamos fpocket
-4.2.3, que detecta bolsillos en la estructura y calcula descriptores como el
-volumen y el *druggability score*. Esto reproduce esa parte del análisis, pero no
-todo el procedimiento de CaviDB ni sus resultados exactos. La estructura de entrada
-fue `datos/estructuras/2FVL_B.pdb`: corresponde a la cadena B y no incluye aguas ni
-ligandos, incluido el NADP.
-
-El script `src/03_analizar_cavidades.py` automatiza el análisis. Lee los PDB de
-`datos/estructuras/`, ejecuta fpocket y PROPKA, y guarda tablas en `resultados/`.
-Para repetir la corrida del repositorio se usa:
-
-```bash
-python src/03_analizar_cavidades.py \
-    --estructuras datos/estructuras \
-    --salida resultados
-```
-
-El script procesa todas las estructuras de esa carpeta; los valores de este desafío
-corresponden a la fila `2FVL_B` de `resultados/cavidades.csv`. Para identificar la
-cavidad como parte del sitio catalítico y de unión al NADP, comparamos los residuos
-que fpocket asignó al bolsillo con los residuos funcionales conocidos de AKR1C4.
-fpocket predice cavidades, pero no determina por sí solo su función biológica.
+> **Nota de contexto y reproducción (para la cátedra).** Cuando hice el trabajo,
+> CaviDB no respondía y no pude consultar sus resultados directamente. Para analizar
+> las cavidades usé fpocket 4.2.3, que detecta bolsillos y calcula descriptores como
+> el volumen y el *druggability score*. Con esto reproduje esa parte del análisis,
+> pero no todo el procedimiento de CaviDB ni sus resultados exactos. Usé
+> `datos/estructuras/2FVL_B.pdb`, que contiene la cadena B sin aguas ni ligandos,
+> incluido el NADP.
+>
+> Para generar las tablas ejecuté este comando:
+>
+> ```bash
+> python src/03_analizar_cavidades.py \
+>     --estructuras datos/estructuras \
+>     --salida resultados
+> ```
+>
+> El script procesa todos los PDB de esa carpeta con fpocket y PROPKA. Los valores
+> de este desafío corresponden a la fila `2FVL_B` de `resultados/cavidades.csv`.
+> Para reconocer la cavidad como parte del sitio catalítico y de unión al NADP,
+> comparé los residuos del bolsillo con los residuos funcionales conocidos de
+> AKR1C4. fpocket predice cavidades, pero no determina por sí solo su función
+> biológica.
 
 | | Resultado |
 |---|---|
