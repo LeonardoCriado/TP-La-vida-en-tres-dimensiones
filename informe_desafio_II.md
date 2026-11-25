@@ -5,7 +5,7 @@ Leonardo Criado · noviembre de 2026
 
 ### Desafío II — AKR1C4 en UniProt
 
-> **Consigna original (resumida):** Consultar UniProt y anotar los sitios de AKR1C4 que tienen relevancia biológica. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
+> **Consigna :** Consultar UniProt y anotar los sitios de AKR1C4 que tienen relevancia biológica. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
 
 **Proteína:** aldo-keto reductasa familia 1, miembro C4 (AKR1C4; UniProt
 [P17516](https://www.uniprot.org/uniprotkb/P17516/entry)), 323 aminoácidos.
