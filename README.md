@@ -5,7 +5,7 @@ albúminas y predicción de estructura con AlphaFold2/ColabFold.
 
 **Autor:** Leonardo Criado · **Fecha:** noviembre de 2026
 
-El [informe integral revisado](TP_revisado.md) reúne el desarrollo completo. Para leer cada consigna por separado, están los informes de los [desafíos I](informe_desafio_I.md), [II](informe_desafio_II.md), [III](informe_desafio_III.md), [IV](informe_desafio_IV.md), [V](informe_desafio_V.md) y [VI](informe_desafio_VI.md). El [diagnóstico de revisión](diagnostico_revision.md) resume los hallazgos.
+El desarrollo está organizado por consigna en los informes de los [desafíos I](informe_desafio_I.md), [II](informe_desafio_II.md), [III](informe_desafio_III.md), [IV](informe_desafio_IV.md), [V](informe_desafio_V.md) y [VI](informe_desafio_VI.md).
 
 ---
 
@@ -27,9 +27,6 @@ El [informe integral revisado](TP_revisado.md) reúne el desarrollo completo. Pa
 
 ```
 .
-├── TP_revisado.md                 # informe integral corregido
-├── diagnostico_revision.md        # diagnóstico de la primera etapa
-├── informe.md                     # original conservado
 ├── informe_desafio_I.md           # EGFR en dos conformeros
 ├── informe_desafio_II.md          # AKR1C4 en UniProt
 ├── informe_desafio_III.md         # cavidades de AKR1C4
@@ -42,7 +39,7 @@ El [informe integral revisado](TP_revisado.md) reúne el desarrollo completo. Pa
 │   ├── 1UBQ.pdb                   # ubiquitina
 │   ├── AF-P03129.pdb              # modelo ViRO3D de E7 (HPV16)
 │   ├── PAE_P03129.json            # PAE de ese modelo
-│   ├── test_3b510.result.zip      # corrida ColabFold usada en TP_revisado
+│   ├── test_3b510.result.zip      # corrida ColabFold usada en el desafío VI
 │   └── estructuras/               # cadenas usadas en el análisis de cavidades
 ├── src/
 │   ├── 01_descargar_estructuras.sh   # baja los PDB y arma las cadenas
@@ -106,7 +103,7 @@ la raíz del repositorio, instalan las dependencias y se vuelven a ejecutar solo
   para comparar conformeros en las mismas condiciones. Los volúmenes pueden variar
   levemente entre corridas de fpocket.
 - El archivo `datos/AF-P03129.pdb` corresponde a ViRO3D, según su encabezado. Para
-  el informe revisado se usó el modelo relajado rank 1 guardado en
+  el desafío VI se usó el modelo relajado rank 1 guardado en
   `datos/test_3b510.result.zip`; la configuración incluida indica ColabFold 1.6.3,
   plantillas activadas y `num_relax=1`. Los nuevos valores están en
   `resultados/plddt_E7_colabfold.csv` y la figura asociada. Los archivos anteriores
