@@ -5,7 +5,7 @@ Leonardo Criado · noviembre de 2026
 
 ### Desafío III — Las cavidades de 2FVLB
 
-> **Consigna original (resumida):** Analizar las cavidades de 2FVLB, indicar cuántas se predijeron, si hay alguna drogable y si coincide con un sitio biológicamente relevante. También se propone investigar el docking y su posible aplicación al trastorno mencionado. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
+> **Consigna :** Analizar las cavidades de 2FVLB, indicar cuántas se predijeron, si hay alguna drogable y si coincide con un sitio biológicamente relevante. También se propone investigar el docking y su posible aplicación al trastorno mencionado. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
 
 **Estructura:** 2FVL, cadena B (2FVLB), AKR1C4 unida a NADP⁺, difracción de rayos X
 a 2,4 Å. Se eliminó el NADP para el análisis, de modo que el bolsillo del cofactor
