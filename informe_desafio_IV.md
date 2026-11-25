@@ -5,7 +5,7 @@ Leonardo Criado · noviembre de 2026
 
 ### Desafío IV — La albúmina humana (1AO6A)
 
-> **Consigna original (resumida):** Consultar CaviDB para la estructura 1AO6A, contar y comparar las cavidades, revisar su solapamiento con residuos de interés y analizar si hay una cavidad potencialmente activada según los pKa. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
+> **Consigna :** Consultar CaviDB para la estructura 1AO6A, contar y comparar las cavidades, revisar su solapamiento con residuos de interés y analizar si hay una cavidad potencialmente activada según los pKa. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
 
 **Estructura:** 1AO6, cadena A, albúmina sérica humana (HSA), 2,5 Å, sin ligandos
 (albúmina "defatted"). La HSA tiene tres dominios homólogos (I, II y III), cada uno
@@ -13,7 +13,7 @@ con dos subdominios (A y B); los sitios de unión a fármacos más importantes s
 **sitio I** (subdominio IIA, Sudlow I) y el **sitio II** (subdominio IIIA,
 Sudlow II).
 
-> **Nota de contexto y reproducción (para la cátedra).** Cuando hice el trabajo,
+> **Nota :** Cuando hice el trabajo,
 > CaviDB no respondía y no pude consultar directamente sus resultados para 1AO6A.
 > Por eso analicé las cavidades con fpocket 4.2.3 y los pKa con PROPKA 3.5.1. Usé
 > `datos/estructuras/1AO6_A.pdb`, que contiene la cadena A sin aguas ni ligandos.
