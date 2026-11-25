@@ -10,6 +10,24 @@ Leonardo Criado · noviembre de 2026
 **Estructura:** 4JK4, cadena A, albúmina sérica bovina (BSA) en complejo con ácido
 3,5-diiodosalicílico, 2,65 Å. Se eliminaron los ligandos para el análisis.
 
+> **Nota de contexto y reproducción:** Cuando hice el trabajo, CaviDB no respondía
+> y no pude consultar directamente sus resultados para 4JK4A. Por eso analicé las
+> cavidades con fpocket 4.2.3 y los pKa con PROPKA 3.5.1. Usé
+> `datos/estructuras/4JK4_A.pdb`, que contiene la cadena A sin aguas ni ligandos.
+> Para repetir el análisis ejecuté este comando:
+>
+> ```bash
+> python src/03_analizar_cavidades.py \
+>     --estructuras datos/estructuras \
+>     --salida resultados
+> ```
+>
+> El script procesa todos los PDB de esa carpeta y guarda las tablas en
+> `resultados/`. Para revisar mis resultados del desafío, consulté las filas
+> `4JK4_A` de `cavidades.csv` y `pka.csv`. Con este método pude analizar las
+> cavidades y los pKa con las herramientas disponibles, pero no reproduje todos
+> los pasos ni necesariamente obtuve los mismos resultados que CaviDB.
+
 | | Resultado |
 |---|---|
 | Cavidades predichas | **41** |
