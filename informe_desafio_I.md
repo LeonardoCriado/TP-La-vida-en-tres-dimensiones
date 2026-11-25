@@ -5,10 +5,8 @@ Leonardo Criado · noviembre de 2026
 
 ### Desafío I — El sitio activo de EGFR en dos conformeros
 
-> **Consigna original (resumida):** Comparar la posición 837 y el tamaño de los bolsillos en los conformeros activo e inactivo de EGFR. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
+> **Consigna:** Comparar la posición 837 y el tamaño de los bolsillos en los conformeros activo e inactivo de EGFR. [Fuente](https://github.com/AJVelezRueda/Introduccion_a_la_Bioinformatica/blob/master/Teorico_Practicos/Bioinform%C3%A1tica_Estructural/La_vida_en_tres_dimensiones.md).
 
-**Consigna:** comparar el sitio activo de los conformeros 1M14 (activo) y 3W32
-(inactivo) en la posición 837 y comparar los tamaños de las cavidades.
 
 **Un detalle de numeración que cambia la respuesta.** La 1M14 numera la cadena A
 con un corrimiento de −24 respecto de la numeración canónica de EGFR (DBREF:
