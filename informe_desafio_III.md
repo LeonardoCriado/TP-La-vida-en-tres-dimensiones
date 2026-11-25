@@ -11,6 +11,30 @@ Leonardo Criado · noviembre de 2026
 a 2,4 Å. Se eliminó el NADP para el análisis, de modo que el bolsillo del cofactor
 queda vacío.
 
+**Método alternativo.** Cuando hicimos el trabajo, CaviDB no respondía y no pudimos
+consultar sus resultados directamente. Para analizar las cavidades usamos fpocket
+4.2.3, que detecta bolsillos en la estructura y calcula descriptores como el
+volumen y el *druggability score*. Esto reproduce esa parte del análisis, pero no
+todo el procedimiento de CaviDB ni sus resultados exactos. La estructura de entrada
+fue `datos/estructuras/2FVL_B.pdb`: corresponde a la cadena B y no incluye aguas ni
+ligandos, incluido el NADP.
+
+El script `src/03_analizar_cavidades.py` automatiza el análisis. Lee los PDB de
+`datos/estructuras/`, ejecuta fpocket y PROPKA, y guarda tablas en `resultados/`.
+Para repetir la corrida del repositorio se usa:
+
+```bash
+python src/03_analizar_cavidades.py \
+    --estructuras datos/estructuras \
+    --salida resultados
+```
+
+El script procesa todas las estructuras de esa carpeta; los valores de este desafío
+corresponden a la fila `2FVL_B` de `resultados/cavidades.csv`. Para identificar la
+cavidad como parte del sitio catalítico y de unión al NADP, comparamos los residuos
+que fpocket asignó al bolsillo con los residuos funcionales conocidos de AKR1C4.
+fpocket predice cavidades, pero no determina por sí solo su función biológica.
+
 | | Resultado |
 |---|---|
 | Cavidades predichas | **21** |
@@ -32,8 +56,9 @@ valores no deben tomarse como los pKa fisiológicos definitivos: la ausencia del
 cofactor y de hidrógenos explícitos afecta el cálculo. Lo robusto es la
 identificación del sitio, no el valor absoluto.
 
-**Cautela:** CaviDB puede reportar un número de cavidades algo distinto según cómo
-separe el sitio del NADP y según la versión de fpocket. Nuestra corrida da 21 y una
-sola cavidad supera el corte de druggability > 0,5.
+**Cautela:** el número y los descriptores pueden diferir de los de CaviDB por las
+versiones de las herramientas y por cómo se preparó la estructura. En nuestro
+análisis fpocket predijo 21 cavidades y una sola superó el corte de druggability
+> 0,5.
 
 ---
