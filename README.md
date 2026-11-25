@@ -61,21 +61,84 @@ El desarrollo está organizado por consigna en los informes de los [desafíos I]
 
 ---
 
-## Cómo reproducir
+## Requisitos e instalación
+
+Necesitás una terminal Bash y Conda o Mamba. Si todavía no tenés Conda, podés
+instalar Miniforge siguiendo la [guía oficial](https://conda-forge.org/download/).
+También necesitás `curl` para descargar las estructuras y `unzip` para extraer la
+corrida de ColabFold. Estos tres comandos son herramientas del sistema y no están
+incluidos en `environment.yml`. Podés comprobar si están disponibles con:
 
 ```bash
-# 1) entorno (conda/mamba)
+command -v bash curl unzip
+```
+
+Si falta alguno, instalalo con el gestor de paquetes de tu sistema operativo.
+El archivo `environment.yml` instala dentro del entorno Python 3.11, Biopython,
+NumPy, Matplotlib, fpocket 4.2.3 y PROPKA 3.5.1. No hace falta instalar ColabFold
+para ejecutar el script `05_plddt.py`: el repositorio ya incluye el ZIP del modelo.
+
+Desde la raíz del repositorio, creá y activá el entorno:
+
+```bash
+# Si usás Mamba, podés reemplazar "conda" por "mamba".
 conda env create -f environment.yml
 conda activate tp-estructural
+```
 
-# 2) estructuras
+Activá `tp-estructural` cada vez que abras una terminal nueva antes de ejecutar
+los scripts. Para comprobar que quedó activo y que las herramientas necesarias
+están disponibles, ejecutá:
+
+```bash
+python --version          # debe indicar Python 3.11.x
+command -v fpocket        # debe mostrar una ruta dentro del entorno Conda
+command -v propka3        # debe mostrar una ruta dentro del entorno Conda
+```
+
+Si el entorno ya existía pero le faltan paquetes, actualizalo desde la raíz del
+repositorio y volvé a activarlo:
+
+```bash
+conda env update -f environment.yml
+conda activate tp-estructural
+```
+
+El error `FileNotFoundError: ... 'fpocket'` significa que el script no encuentra
+el ejecutable. En general ocurre cuando no está activo el entorno `tp-estructural`
+o cuando fpocket no se instaló correctamente. No alcanza con que Python esté
+instalado: el comando `fpocket` también tiene que estar disponible en el entorno.
+
+## Cómo ejecutar los scripts
+
+Los scripts usan estos requisitos y archivos:
+
+| Script | Requisitos y entrada |
+|---|---|
+| `src/01_descargar_estructuras.sh` | Bash, `curl`, Python y Biopython; requiere conexión para descargar estructuras. |
+| `src/02_explorar_pdb.py` | Python 3.11 y un archivo PDB, por ejemplo `datos/1UBQ.pdb`; no necesita paquetes externos. |
+| `src/03_analizar_cavidades.py` | Python 3.11, `fpocket`, `propka3` y los PDB de `datos/estructuras/`. |
+| `src/04_figuras_cavidades.py` | Python, NumPy, Matplotlib y `resultados/cavidades.csv`. |
+| `src/05_plddt.py` | Python, NumPy y Matplotlib; recibe un PDB de AlphaFold/ColabFold y, opcionalmente, el JSON de PAE. |
+
+Ejecutá los comandos desde la raíz del repositorio y con el entorno activado:
+
+```bash
+# 1) Descargar estructuras y preparar las cadenas
 bash src/01_descargar_estructuras.sh
 
-# 3) análisis de cavidades y pKa
-python src/03_analizar_cavidades.py
+# 2) Explorar el PDB de ubiquitina
+python src/02_explorar_pdb.py datos/1UBQ.pdb
+
+# 3) Analizar cavidades y pKa
+python src/03_analizar_cavidades.py \
+    --estructuras datos/estructuras \
+    --salida resultados
 
 # 4) gráficos
 python src/04_figuras_cavidades.py
+
+# 5) Analizar el modelo de ColabFold incluido en el repositorio
 unzip -q datos/test_3b510.result.zip -d /tmp/tp-colabfold
 python src/05_plddt.py /tmp/tp-colabfold/test_3b510/test_3b510_relaxed_rank_001_alphafold2_ptm_model_4_seed_000.pdb \
     --pae /tmp/tp-colabfold/test_3b510/test_3b510_predicted_aligned_error_v1.json \
